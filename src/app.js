@@ -10,7 +10,7 @@
 const canvas = document.getElementById("window");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-const gl = canvas.getContext("webgl"); if (!gl) {console.log("error: WebGL failed to load");}
+export const gl = canvas.getContext("webgl"); if (!gl) {console.log("error: WebGL failed to load");}
 const info_text = document.getElementById("info-text");
 
 /* temp */
@@ -48,7 +48,7 @@ function initShaderProgram(gl, vsSource, fsSource) {
    gl.linkProgram(shaderProgram);
 
    // checking weather shader program failed
-   if(!gl.getProgramParamater(shaderProgram, gl.LINK_STATUS)) {
+   if(!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {
       info_text.innerHTML = `error: unable to initialize the shader program ${gl.getProgramInfoLog(shaderProgram)}`;
       return null;
    }
@@ -76,6 +76,8 @@ function loadShader(gl, type, source) {
 
    return shader;
 }
+
+const shaderProgram = initShaderProgram(gl, vsSource, fsSource);
 
 
 function draw() {
