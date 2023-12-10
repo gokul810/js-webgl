@@ -1,1 +1,9 @@
 * {padding: 0; margin: 0;}
+
+#info-text {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    color: grey;
+    font-family: monospace;
+}
