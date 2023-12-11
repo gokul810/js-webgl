@@ -79,10 +79,23 @@ function loadShader(gl, type, source) {
 
 const shaderProgram = initShaderProgram(gl, vsSource, fsSource);
 
+// collecting info about the shader program
+const programInfo = {
+   program: shaderProgram,
+   attribLocations: {
+      vertexPosition: gl.getAttribLocation(shaderProgram, "aVertexPosition"),
+   },
+   uniformLocations: {
+      projectionMatrix: gl.getUniformLocation(shaderProgram, "uProjectionMatrix"),
+      modelViewMatrix: gl.getUniformLocation(shaderProgram, "uModelViewMatrix"),  
+   },
+};
+
 
 function draw() {
    gl.clearColor(0.0, 0.0, 0.0, 1.0);
    gl.clear(gl.COLOR_BUFFER_BIT);
+   console.log("Working... sor far");
 }
 
 draw();
