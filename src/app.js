@@ -7,11 +7,15 @@
  * canvas error handling
 */
 
+import { initBuffers } from "./buffer";
+import { drawScene } from "./scene";
+
 const canvas = document.getElementById("window");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 export const gl = canvas.getContext("webgl"); if (!gl) {console.log("error: WebGL failed to load");}
 const info_text = document.getElementById("info-text");
+const buffer = initBuffers(gl);
 
 /* temp */
 if (canvas){info_text.innerHTML = `Scene Loaded canvas-w: ${window.innerwidth} canvas-h: ${window.innerheight}`}
@@ -91,12 +95,4 @@ const programInfo = {
    },
 };
 
-
-function draw() {
-   gl.clearColor(0.0, 0.0, 0.0, 1.0);
-   gl.clear(gl.COLOR_BUFFER_BIT);
-   console.log("Working... sor far");
-}
-
-draw();
-
+drawScene(gl, programInfo, buffer);
