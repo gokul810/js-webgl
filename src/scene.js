@@ -2,6 +2,28 @@
  * scene building
 */
 
+function setPositionAttribute(gl, buffers,  programInfo){
+    const numComponents = 2;
+    const type = gl.FLOAT;
+    const normalize = false;
+    const stride = 0;
+
+    const offset = 0;
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffers.position);
+    gl.vertexAttribPointer(
+        programInfo.attribLocations.vertexPosition,
+        numComponents,
+        type,
+        normalize,
+        stride,
+        offset,
+    );
+
+    gl.enableVertexAttribArray(programInfo.attribLocations.vertexPosition);
+    
+}
+
+
 function drawScene(gl, programInfo, buffers) {
     gl.clearColor(0.0, 0.0, 0.0, 1.0); // clears the entire screen to black (r, g, b, a);
     gl.clearDepth(1.0); // clear everything
@@ -24,7 +46,7 @@ function drawScene(gl, programInfo, buffers) {
     mat4.perspective(projectionMatrix, fieldOfview, aspect, zNear, zFar);
 
     const modelViewMatrix = mat4.create();
-    setPositionAttribute(gl, buffers, programInfo); // something is wrong with this line could'nt figure it out
+     // something is wrong with this line could'nt figure it out
 
     mat4.translate(
         modelViewMatrix,
@@ -45,32 +67,13 @@ function drawScene(gl, programInfo, buffers) {
         modelViewMatrix,
     );
 
+    setPositionAttribute(gl, buffers, programInfo);
+
     {
         const offset = 0;
         const vertexCount = 4;
         gl.drawArrays(gl.TRIANGLE_STRIP, offset, vertexCount);
     }
-}
-
-function setPositionttribute(gl, buffers,  programInfo){
-    const numComponents = 2;
-    const type = gl.FLOAT;
-    const normalize = false;
-    const stride = 0;
-
-    const offset = 0;
-    gl.bindBuffer(gl.ARRAY_BUFFER, buffers.position);
-    gl.vertexAttribPointer(
-        programInfo.attribLocations.vertexPosition,
-        numComponents,
-        type,
-        normalize,
-        stride,
-        offset,
-    );
-
-    gl.enableVertexAttribArray(programInfo.attribLocations.vertexPosition);
-    
 }
 
 export { drawScene };
